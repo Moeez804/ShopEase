@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrifactor Shop - Premium Health Products</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<style>
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+/* Video Background */
+.hero-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Overlay with Glassmorphism */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  z-index: 1;
+}
+
+/* Content */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 950px;
+  padding: 20px;
+  animation: fadeUp 1.5s ease forwards;
+  opacity: 0;
+}
+.hero-title {
+  font-size: 4rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #4ade80, #58df49, #2e7d32);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+.hero-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+/* Buttons */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.btn-animated {
+  position: relative;
+  padding: 14px 40px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 50px;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(90deg, #4ade80, #58df49, #2e7d32);
+  background-size: 300%;
+  animation: gradientMove 6s infinite alternate;
+  box-shadow: 0 0 20px rgba(77, 222, 128, 0.7);
+  transition: transform 0.3s ease;
+}
+.btn-animated:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(77, 222, 128, 0.9);
+}
+.btn-outline {
+  padding: 14px 40px;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+.btn-outline:hover {
+  background: #4ade80;
+  color: #000;
+  transform: translateY(-3px);
+}
+
+/* Floating Shapes */
+.floating-shape {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  animation: float 8s infinite ease-in-out;
+  z-index: 1;
+}
+.shape1 { width: 120px; height: 120px; top: 15%; left: 10%; }
+.shape2 { width: 80px; height: 80px; bottom: 20%; right: 15%; animation-delay: 2s; }
+.shape3 { width: 150px; height: 150px; bottom: 10%; left: 25%; animation-delay: 4s; }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(80px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gradientMove {
+  0% { background-position: 0%; }
+  100% { background-position: 100%; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-30px) rotate(15deg); }
+}
+
+
+    /* ================================
+   🔹 Promo Section
+================================ */
+.promo {
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  color: #fff;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  border-radius: 16px;
+  margin: 3rem auto;
+  max-width: 1100px;
+}
+.promo h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.promo p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+/* ================================
+   🔹 Testimonials Section
+================================ */
+.testimonials {
+  background: #f9f9f9;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.testimonials h2 {
+  margin-bottom: 2rem;
+}
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.testimonial {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-style: italic;
+}
+.testimonial h4 {
+  margin-top: 1rem;
+  color: #4caf50;
+}
+
+/* ================================
+   🔹 Blog Section
+================================ */
+.blog {
+  padding: 4rem 2rem;
+  background: #fff;
+  text-align: center;
+}
+.blog h2 {
+  margin-bottom: 2rem;
+}
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.blog-post {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f4f4f4;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+.blog-post img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.blog-post h3 {
+  padding: 1rem;
+}
+.blog-post a {
+  display: inline-block;
+  margin: 1rem;
+  color: #4caf50;
+  font-weight: 600;
+  text-decoration: none;
+}
+.blog-post:hover {
+  transform: translateY(-5px);
+}
+
+/* ================================
+   🔹 Newsletter Section
+================================ */
+.newsletter {
+  background: #f1f8e9;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: 16px;
+  margin: 3rem auto;
+  max-width: 1100px;
+}
+.newsletter h2 {
+  margin-bottom: 0.5rem;
+}
+.newsletter p {
+  margin-bottom: 1.5rem;
+}
+.newsletter form {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.newsletter input {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  flex: 1;
+  min-width: 250px;
+}
+.newsletter button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.newsletter button:hover {
+  background: #2e7d32;
+}
+/* Section Styling */
+.shop-by-category {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #f0fdf4, #e6fffa);
+  text-align: center;
+}
+
+.shop-by-category .section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  position: relative;
+  color: #222;
+}
+
+.shop-by-category .section-title::after {
+  content: "";
+  width: 80px;
+  height: 4px;
+  background: #27ae60;
+  display: block;
+  margin: 15px auto 0;
+  border-radius: 10px;
+}
+
+/* Grid */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* Card */
+.category-card {
+  background: #fff;
+  padding: 40px 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card i {
+  font-size: 2.5rem;
+  color: #27ae60;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.category-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.category-card p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Hover Effect */
+.category-card::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #27ae60;
+  z-index: 0;
+  transition: top 0.4s ease;
+}
+
+.category-card:hover::before {
+  top: 0;
+}
+
+.category-card:hover h3,
+.category-card:hover p,
+.category-card:hover i {
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.category-card:hover i {
+  transform: scale(1.2);
+}
+@media (max-width: 768px) {
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
+  .category-card {
+    padding: 20px 10px;
+    border-radius: 12px;
+  }
+
+  .category-card i {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+
+  .category-card h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .category-card p {
+    font-size: 0.8rem;
+  }
+}
+/* ================================
+   🔹 Brands Section
+================================ */
+.brands {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.brands h2 {
+  margin-bottom: 2rem;
+}
+.brands-logos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.brands-logos img {
+  max-height: 60px;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s;
+}
+.brands-logos img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+.trending-products {
+  padding: 3rem 0;
+}
+
+.trending-products h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.trending-products .swiper {
+  padding: 1rem;
+}
+
+.trending-products .product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  text-align: center;
+}
+
+.trending-products .product-card:hover {
+  transform: translateY(-5px);
+}
+
+.trending-products .product-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+/* ==============================
+   🌟 Special Offers Section (Legend Style)
+   ============================== */
+.special-offers {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* Animated Glow Overlay */
+.special-offers::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(34,197,94,0.12), transparent 70%);
+  animation: glow 10s infinite linear;
+  z-index: 0;
+}
+@keyframes glow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==============================
+   ✨ Section Title
+   ============================== */
+.special-offers .section-title {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+ 
+}
+
+/* ==============================
+   📦 Sale Section Wrapper
+   ============================== */
+.sale-section {
+  margin-bottom: 60px;   /* space between sections */
+  padding: 30px 20px;
+  border-radius: 16px;
+  background: rgba(30, 41, 59, 0.6); /* semi-dark bg for separation */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Extra breathing room for section title */
+.sale-section .section-title {
+  margin-bottom: 25px;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Subtitle */
+.offer-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #cbd5e1;
+  z-index: 1;
+  position: relative;
+  letter-spacing: 1px;
+}
+
+/* ==============================
+   ⚡ Countdown Timer
+   ============================== */
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  z-index: 2;
+  position: relative;
+}
+.countdown-timer div {
+  background: #1e293b;
+  border: 2px solid #16a34a;
+  border-radius: 3px;
+  padding: 15px 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.countdown-timer div:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 8px 24px rgba(22,163,74,0.6);
+}
+.countdown-timer span {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #22c55e;
+  display: block;
+}
+.countdown-timer small {
+  font-size: 0.5rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ==============================
+   🛍 Flash Sale Grid
+   ============================== */
+.flash-sale-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Always 3 columns */
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .flash-sale-grid {
+    grid-template-columns: repeat(2, 1fr); /* Tablet */
+  }
+}
+@media (max-width: 600px) {
+  .flash-sale-grid {
+    grid-template-columns: repeat(2, 1fr); /* Mobile */
+  }
+  .flash-card {
+    width: 100%;
+    min-height: 100px;
+  }
+}
+@media (max-width: 360px) {
+  .countdown-timer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .countdown-timer div {
+    width: 100%;
+    max-width: 120px;
+  }
+}
+
+/* 📱 Responsive Countdown */
+@media (max-width: 768px) {
+  .countdown-timer span {
+    font-size: 1.4rem; /* slightly smaller on tablets */
+  }
+  .countdown-timer small {
+    font-size: 0.6rem;
+  }
+}
+@media (max-width: 480px) {
+  .countdown-timer {
+    gap: 4px; /* tighter spacing */
+  }
+  .countdown-timer div {
+    padding: 10px 12px; /* smaller box */
+  }
+  .countdown-timer span {
+    font-size: 1.1rem; /* mobile friendly */
+  }
+  .countdown-timer small {
+    font-size: 0.45rem;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* ==============================
+   🔥 Flash Card (Legendary Style)
+   ============================== */
+.flash-card {
+  width: 100%;
+  min-height: 420px; /* Equal height for alignment */
+  background: #1e293b;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+  text-align: center;
+  padding: 20px 15px;
+  transition: all 0.4s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.flash-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 16px 40px rgba(22,163,74,0.6);
+}
+
+/* Product Image */
+.flash-card img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: transform 0.4s ease;
+}
+.flash-card:hover img {
+  transform: scale(1.08);
+}
+
+/* Title */
+.flash-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 8px 0;
+  flex-grow: 0;
+}
+.flash-card .badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #dc2626; /* Red urgency */
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 3;
+  animation: pulseBadge 1.5s infinite;
+}
+
+@keyframes pulseBadge {
+  0% { transform: scale(1); box-shadow: 0 0 10px rgba(220,38,38,0.6); }
+  50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(220,38,38,0.8); }
+  100% { transform: scale(1); box-shadow: 0 0 10px rgba(220,38,38,0.6); }
+}
+
+/* Price */
+.flash-card .price {
+  margin: 8px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+.flash-card .old-price {
+  text-decoration: line-through;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+.flash-card .price span,
+.flash-card .price {
+  color: #22c55e;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* Button */
+.flash-card .btn-sale {
+  display: inline-block;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: auto;
+}
+.flash-card .btn-sale:hover {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  box-shadow: 0 6px 18px rgba(34,197,94,0.6);
+  transform: scale(1.07);
+}
+
+/* ==============================
+   🏷 Discount Badge
+   ============================== */
+.discount-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  animation: pulse 1.5s infinite alternate;
+}
+@keyframes pulse {
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(1.15); opacity: 1; }
+}
+
+</style>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Nutrifactor</h1>
+                <p>Premium Health Products</p>
+            </div>
+            <nav>
+            
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+            
+                </ul>
+            </nav>
+            <div class="search-bar">
+                  <input type="text" id="searchInput" placeholder="Search products...">
+                  <button id="searchBtn"><i class="fas fa-search"></i></button>
+             </div>
+
+            <div>
+                    <a href="login.html" class="login-btn">Login</a>
+                    <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></a>
+                    </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+     <section class="hero">
+  <!-- Background Video -->
+  <video autoplay muted loop class="hero-video">
+    <source src="videos/hero1-bg.mp4" type="video/mp4">
+    <!-- Fallback image -->
+    <img src="admin/images/hero-bg.jpg" alt="background" />
+  </video>
+
+  <!-- Overlay -->
+  <div class="hero-overlay"></div>
+
+  <!-- Content -->
+  <div class="hero-content">
+    <h1 class="hero-title"><span class="typing-text"></span></h1>
+    <p class="hero-subtitle">Premium supplements made with science, trusted worldwide.</p>
+    
+    <div class="hero-buttons">
+      <a href="products.html" class="btn-animated">Shop Now</a>
+      <a href="about.html" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+
+  <!-- Floating Shapes -->
+  <div class="floating-shape shape1"></div>
+  <div class="floating-shape shape2"></div>
+  <div class="floating-shape shape3"></div>
+</section>
+        <section class="featured-products">
+            <div class="container">
+                <h2>Wellness Essentials</h2>
+                <div class="products-grid" id="featured-products">
+                    <!-- Products will be loaded via JavaScript -->
+                </div>
+                <a href="products.html" class="btn">View All Products</a>
+            </div>
+        </section>
+<section id="salesContainer" class="special-offers" style="display:none;">
+  <!-- Sections will be generated dynamically -->
+</section>
+
+      <section class="benefits">
+  <div class="container">
+    <div class="marquee">
+      <h2>Why Shop With Us?</h2>
+      <div class="marquee-inner">
+        <!-- First set -->
+        <div class="benefit-item">
+          <i class="fas fa-truck"></i>
+          <h3>Free Shipping</h3>
+          <p>On orders over PKR50</p>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-undo"></i>
+          <h3>Easy Returns</h3>
+          <p>30-day return policy</p>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-lock"></i>
+          <h3>Secure Payment</h3>
+          <p>100% secure checkout</p>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-headset"></i>
+          <h3>24/7 Support</h3>
+          <p>Dedicated support</p>
+        </div>
+
+        <!-- Duplicate set (for infinite loop) -->
+        <div class="benefit-item">
+          <i class="fas fa-truck"></i>
+          <h3>Free Shipping</h3>
+          <p>On orders over PKR50</p>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-undo"></i>
+          <h3>Easy Returns</h3>
+          <p>30-day return policy</p>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-lock"></i>
+          <h3>Secure Payment</h3>
+          <p>100% secure checkout</p>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-headset"></i>
+          <h3>24/7 Support</h3>
+          <p>Dedicated support</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Quick View Modal -->
+<div id="quickViewModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close">&times;</span>
+    
+    <div class="modal-body">
+      <div class="modal-image">
+        <img id="modalImage" src="" alt="Product">
+      </div>
+      <div class="modal-info">
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+        <div class="modal-price" id="modalPrice"></div>
+        <button id="modalAddToCart" class="add-to-cart">
+          <i class="fas fa-shopping-cart"></i> Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="shop-by-category">
+  <div class="container">
+    <h2 class="section-title">Shop by Category</h2>
+    <div class="categories-grid">
+      <div class="category-card" data-category="vitamins">
+        <i class="fas fa-capsules"></i>
+        <h3>Vitamins</h3>
+        <p>Boost your daily health with essential vitamins.</p>
+      </div>
+
+      <div class="category-card" data-category="minerals">
+        <i class="fas fa-gem"></i>
+        <h3>Minerals</h3>
+        <p>Support strong bones and overall wellness.</p>
+      </div>
+
+      <div class="category-card" data-category="protein">
+        <i class="fas fa-dumbbell"></i>
+        <h3>Protein</h3>
+        <p>Fuel your workouts and build muscle naturally.</p>
+      </div>
+
+      <div class="category-card" data-category="omega-3">
+        <i class="fas fa-fish"></i>
+        <h3>Omega-3</h3>
+        <p>Heart, brain & joint support with Omega-3.</p>
+      </div>
+
+      <div class="category-card" data-category="herbal">
+        <i class="fas fa-leaf"></i>
+        <h3>Herbal Supplements</h3>
+        <p>Natural remedies for a healthier lifestyle.</p>
+      </div>
+
+      <div class="category-card" data-category="weight-management">
+        <i class="fas fa-weight"></i>
+        <h3>Weight Management</h3>
+        <p>Stay fit with premium weight solutions.</p>
+      </div>
+
+      <div class="category-card" data-category="immune-support">
+        <i class="fas fa-shield-virus"></i>
+        <h3>Immune Support</h3>
+        <p>Strengthen your immunity with science-backed products.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Promo Section -->
+<section class="promo">
+  <div class="container">
+    <h2>Special Offer</h2>
+    <p>Get <strong>20% OFF</strong> your first order – limited time only!</p>
+    <a href="products.html" class="btn">Shop Deals</a>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="container">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <p>"Nutrifactor supplements improved my energy levels within weeks!"</p>
+        <h4>- Sarah K.</h4>
+      </div>
+      <div class="testimonial">
+        <p>"Fast delivery and top-quality products. Highly recommend!"</p>
+        <h4>- James L.</h4>
+      </div>
+      <div class="testimonial">
+        <p>"Customer support was amazing and guided me to the right product."</p>
+        <h4>- Ayesha M.</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Section -->
+<section class="blog">
+  <div class="container">
+    <h2>Health & Wellness Tips</h2>
+    <div class="blog-grid">
+      <div class="blog-post">
+        <img src="images/blog1.jpg" alt="Vitamin Benefits">
+        <h3>Top 5 Vitamins for Daily Energy</h3>
+        <a href="blog.html">Read More</a>
+      </div>
+      <div class="blog-post">
+        <img src="images/blog2.jpg" alt="Immunity">
+        <h3>Boosting Your Immunity Naturally</h3>
+        <a href="blog.html">Read More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter">
+  <div class="container">
+    <h2>Stay Updated</h2>
+    <p>Subscribe to get special offers, free giveaways, and health tips.</p>
+    <form>
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit" class="btn">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- Brands Section -->
+<section class="brands">
+  <div class="container">
+    <h2>Trusted By</h2>
+    <div class="brands-logos">
+      <img src="images/brand1.png" alt="Brand 1">
+      <img src="images/brand2.png" alt="Brand 2">
+      <img src="images/brand3.png" alt="Brand 3">
+    </div>
+  </div>
+</section>
+
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-section">
+                <h3>Nutrifactor</h3>
+                <p>Premium quality health supplements for your wellness journey.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@nutrifactor.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Nutrifactor. All rights reserved.</p>
+        </div>
+    </footer>
+    <button id="backToTop"><i class="fas fa-arrow-up"></i></button>
+     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+
+ // Typing effect
+const text = ["Fuel Your Body", "Unlock Your Potential", "Live Strong, Stay Healthy"];
+let index = 0;
+let charIndex = 0;
+let currentText = "";
+let isDeleting = false;
+const typingElement = document.querySelector(".typing-text");
+
+function typeEffect() {
+  if (isDeleting) {
+    currentText = text[index].substring(0, charIndex--);
+  } else {
+    currentText = text[index].substring(0, charIndex++);
+  }
+  typingElement.textContent = currentText;
+
+  let typingSpeed = isDeleting ? 60 : 120;
+
+  if (!isDeleting && charIndex === text[index].length) {
+    typingSpeed = 1500;
+    isDeleting = true;
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    index = (index + 1) % text.length;
+  }
+  setTimeout(typeEffect, typingSpeed);
+}
+document.addEventListener("DOMContentLoaded", typeEffect);
+
+// Parallax scroll
+window.addEventListener("scroll", () => {
+  const offset = window.scrollY * 0.5;
+  document.querySelector(".hero-video").style.transform = `translateY(${offset}px)`;
+});
+
+document.querySelectorAll(".category-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const category = card.dataset.category;
+    // Redirect to products.html with category filter
+    window.location.href = `products.html?category=${category}`;
+  });
+});
+
+    AOS.init({ duration: 1000 });
+    const btn = document.getElementById("backToTop");
+    window.onscroll = () => {
+      if (window.scrollY > 300) btn.style.display = "block";
+      else btn.style.display = "none";
+    };
+    btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  </script>
+  <!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/jj.js"></script>
+</body>
+</html>

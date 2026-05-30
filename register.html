@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register-ShopEase </title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ============================================
+   SHOPEASE - FUTURISTIC 3D GLASS THEME
+   Complete CSS for Login Page
+   ============================================ */
+
+/* CSS Variables */
+:root {
+    --primary-color: #00f2fe;
+    --secondary-color: #4facfe;
+    --accent-color: #43e97b;
+    --danger-color: #ff416c;
+    --warning-color: #ffd166;
+    --dark-bg: #0a0e17;
+    --darker-bg: #050811;
+    --glass-bg: rgba(16, 24, 39, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --gradient-primary: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    --gradient-secondary: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    --gradient-danger: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+    --neon-glow: 0 0 20px rgba(0, 242, 254, 0.5);
+    --transition-fast: 0.3s ease;
+    --transition-medium: 0.5s ease;
+    --transition-slow: 0.8s ease;
+    --border-radius-sm: 12px;
+    --border-radius-md: 20px;
+    --border-radius-lg: 30px;
+}
+/* Fix for Auth Container Height */
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Changed from center to flex-start */
+    min-height: 100vh; /* Changed from calc(100vh - 200px) */
+    padding: 40px 20px;
+    position: relative;
+    overflow-y: auto; /* Allow scrolling if needed */
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 550px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    padding: 40px 35px; /* Reduced padding */
+    backdrop-filter: blur(20px);
+    box-shadow: var(--glass-shadow);
+    position: relative;
+    overflow: hidden;
+    animation: slideUp 0.5s ease;
+    margin: 40px auto; /* Added margin top/bottom */
+    max-height: 90vh; /* Limit max height */
+    overflow-y: auto; /* Make container scrollable */
+}
+
+/* Reduce spacing in form */
+.register-form {
+    margin-bottom: 20px; /* Reduced from 30px */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Reduced from 25px */
+}
+
+.form-row {
+    gap: 15px; /* Reduced from 20px */
+    margin-bottom: 15px; /* Reduced from 20px */
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px 18px; /* Reduced from 15px 20px */
+}
+
+.form-group textarea {
+    min-height: 80px; /* Reduced from 100px */
+}
+
+.auth-container h1 {
+    font-size: 28px; /* Reduced from 32px */
+    margin-bottom: 25px; /* Reduced from 30px */
+}
+
+/* Adjust button padding */
+.register-form .btn {
+    padding: 16px; /* Reduced from 18px */
+}
+
+/* Adjust links spacing */
+.auth-links {
+    padding-top: 20px; /* Reduced from 25px */
+    margin-top: 15px; /* Added margin */
+}
+
+/* Reduce container padding on mobile */
+@media (max-width: 768px) {
+    .auth-page {
+        padding: 20px 15px; /* Reduced padding */
+    }
+    
+    .auth-container {
+        padding: 35px 25px; /* Further reduced padding */
+        margin: 20px auto;
+    }
+    
+    .auth-container h1 {
+        font-size: 24px; /* Smaller on mobile */
+        margin-bottom: 20px;
+    }
+}
+
+/* Even smaller screens */
+@media (max-width: 576px) {
+    .auth-container {
+        padding: 30px 20px;
+        margin: 15px auto;
+        max-height: 95vh; /* Slightly more height on mobile */
+    }
+    
+    .auth-container h1 {
+        font-size: 22px;
+    }
+    
+    .form-group {
+        margin-bottom: 18px;
+    }
+    
+    .form-row {
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+}
+
+/* Make sure the container doesn't get too small */
+@media (max-height: 700px) {
+    .auth-container {
+        padding: 30px 25px;
+        margin: 20px auto;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .auth-container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+}
+
+/* Custom scrollbar for the container */
+.auth-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.auth-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.auth-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 3px;
+}
+
+.auth-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Reduce animation delays for form groups to make them appear faster */
+.form-group:nth-child(1) { animation-delay: 0.05s; }
+.form-group:nth-child(2) { animation-delay: 0.1s; }
+.form-group:nth-child(3) { animation-delay: 0.15s; }
+.form-group:nth-child(4) { animation-delay: 0.2s; }
+.form-group:nth-child(5) { animation-delay: 0.25s; }
+.form-group:nth-child(6) { animation-delay: 0.3s; }
+
+/* Ensure body doesn't have unnecessary overflow */
+body {
+    overflow-x: hidden;
+}
+
+/* Add smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Optional: Add a "Scroll to see more" indicator for very tall forms */
+.auth-container::after {
+    content: '↓ Scroll for more';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.auth-container.scrollable::after {
+    opacity: 1;
+}
+.register-form .btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: var(--border-radius-md);
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.register-form .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.register-form .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: var(--transition-medium);
+}
+
+.register-form .btn:hover::before {
+    left: 100%;
+}
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="bg-blur"></div>
+        <div class="particles"></div>
+        <div class="grid-lines"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="glass-header">
+        <div class="container">
+            <div class="header-wrapper">
+                <!-- Logo with 3D Effect -->
+                <div class="logo-3d">
+                    <div class="logo-shape">
+                        <div class="cube-logo">
+                            <div class="cube-face cube-front">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="cube-face cube-back">
+                                <span>S</span>
+                            </div>
+                            <div class="cube-face cube-right">
+                                <span>E</span>
+                            </div>
+                            <div class="cube-face cube-left">
+                                <span>3D</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="logo-text">
+                        <h1 class="logo-title">
+                            <span class="text-stroke">SHOP</span>
+                            <span class="text-gradient">EASE</span>
+                        </h1>
+                        <p class="logo-subtitle">Next-Gen 3D Shopping</p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="nav-3d">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link" data-tooltip="Home">
+                                <i class="fas fa-home"></i>
+                                <span class="nav-text">HOME</span>
+                                <div class="nav-glow"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="products.html" class="nav-link" data-tooltip="Products">
+                                <i class="fas fa-cube"></i>
+                                <span class="nav-text">PRODUCTS</span>
+                                <div class="nav-glow"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="about.html" class="nav-link" data-tooltip="About">
+                                <i class="fas fa-info-circle"></i>
+                                <span class="nav-text">ABOUT</span>
+                                <div class="nav-glow"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link" data-tooltip="Contact">
+                                <i class="fas fa-comments"></i>
+                                <span class="nav-text">CONTACT</span>
+                                <div class="nav-glow"></div>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                    
+                </nav>
+
+                <!-- Search with 3D effect -->
+                <div class="search-3d">
+                    <div class="search-wrapper">
+                        <input type="text" 
+                               id="searchInput" 
+                               class="search-field" 
+                               placeholder="Search in 3D space..."
+                               autocomplete="off">
+                        <button id="searchBtn" class="search-btn">
+                            <i class="fas fa-search"></i>
+                            <span class="search-pulse"></span>
+                        </button>
+                        <div class="search-suggestions"></div>
+                    </div>
+                </div>
+
+                <!-- User Actions -->
+                <div class="user-actions-3d">
+                    <a href="login.html" class="login-btn-3d" data-tooltip="Login">
+                        <div class="btn-inner">
+                            <i class="fas fa-user-astronaut"></i>
+                            <span>LOGIN</span>
+                        </div>
+                        <div class="btn-reflection"></div>
+                    </a>
+                    
+                    <a href="cart.html" class="cart-btn-3d" data-tooltip="Cart">
+                        <div class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="cart-badge">0</span>
+                        </div>
+                        <div class="cart-pulse"></div>
+                    </a>
+
+                    <div class="mobile-toggle">
+                        <div class="hamburger-3d">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <main class="auth-page">
+        <div class="container">
+            <div class="auth-container">
+                <h1>Create an Account</h1>
+                
+                <form class="register-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone">
+                    </div>
+                    
+                    <button type="submit" class="btn">Register</button>
+                </form>
+                
+                <div class="auth-links">
+                    <p>Already have an account? <a href="login.html">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+  <!-- Footer -->
+    <footer class="footer-3d">
+        <div class="footer-wave"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo-3d">
+                        <div class="logo-mini-3d">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <h3>SHOP<span class="text-gradient">EASE</span></h3>
+                        <p>The future of shopping is here. Experience products in stunning 3D.</p>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>NAVIGATE</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>CONTACT</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> +92 320 7454190</li>
+                        <li><i class="fas fa-envelope"></i> info@shopease.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Kohinoor, Faisalabad</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>CONNECT</h4>
+                    <div class="social-3d">
+                        <a href="#" class="social-link-3d"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link-3d"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link-3d"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link-3d"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ShopEase 3D. All rights reserved. | Next Generation Shopping Experience</p>
+            </div>
+        </div>
+    </footer>
+<script>
+    
+/* JavaScript to detect if container needs scrolling */
+const authContainer = document.querySelector('.auth-container');
+if (authContainer) {
+    const checkScroll = () => {
+        if (authContainer.scrollHeight > authContainer.clientHeight + 20) {
+            authContainer.classList.add('scrollable');
+        } else {
+            authContainer.classList.remove('scrollable');
+        }
+    };
+    
+    // Check initially
+    checkScroll();
+    
+    // Check on resize
+    window.addEventListener('resize', checkScroll);
+}
+</script>
+    <script src="js/jj.js"></script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - Futuristic 3D Shopping Experience</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+     <link rel="stylesheet" href="css/details.css">
+</head>
+<body class="dark-theme">
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="bg-blur"></div>
+        <div class="particles"></div>
+        <div class="grid-lines"></div>
+    </div>
+
+
+
+    <!-- Header -->
+    <header class="glass-header">
+        <div class="container">
+            <div class="header-wrapper">
+                <!-- Logo with 3D Effect -->
+                <div class="logo-3d">
+                    <div class="logo-shape">
+                        <div class="cube-logo">
+                            <div class="cube-face cube-front">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="cube-face cube-back">
+                                <span>S</span>
+                            </div>
+                            <div class="cube-face cube-right">
+                                <span>E</span>
+                            </div>
+                            <div class="cube-face cube-left">
+                                <span>3D</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="logo-text">
+                        <h1 class="logo-title">
+                            <span class="text-stroke">SHOP</span>
+                            <span class="text-gradient">EASE</span>
+                        </h1>
+                        <p class="logo-subtitle">Next-Gen 3D Shopping</p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="nav-3d">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link" data-tooltip="Home">
+                                <i class="fas fa-home"></i>
+                                <span class="nav-text">HOME</span>
+                                <div class="nav-glow"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="products.html" class="nav-link" data-tooltip="Products">
+                                <i class="fas fa-cube"></i>
+                                <span class="nav-text">PRODUCTS</span>
+                                <div class="nav-glow"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="about.html" class="nav-link" data-tooltip="About">
+                                <i class="fas fa-info-circle"></i>
+                                <span class="nav-text">ABOUT</span>
+                                <div class="nav-glow"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link" data-tooltip="Contact">
+                                <i class="fas fa-comments"></i>
+                                <span class="nav-text">CONTACT</span>
+                                <div class="nav-glow"></div>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                    
+                </nav>
+
+                <!-- Search with 3D effect -->
+                <div class="search-3d">
+                    <div class="search-wrapper">
+                        <input type="text" 
+                               id="searchInput" 
+                               class="search-field" 
+                               placeholder="Search in 3D space..."
+                               autocomplete="off">
+                        <button id="searchBtn" class="search-btn">
+                            <i class="fas fa-search"></i>
+                            <span class="search-pulse"></span>
+                        </button>
+                        <div class="search-suggestions"></div>
+                    </div>
+                </div>
+
+                <!-- User Actions -->
+                <div class="user-actions-3d">
+                    <a href="login.html" class="login-btn-3d" data-tooltip="Login">
+                        <div class="btn-inner">
+                            <i class="fas fa-user-astronaut"></i>
+                            <span>LOGIN</span>
+                        </div>
+                        <div class="btn-reflection"></div>
+                    </a>
+                    
+                    <a href="cart.html" class="cart-btn-3d" data-tooltip="Cart">
+                        <div class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="cart-badge">0</span>
+                        </div>
+                        <div class="cart-pulse"></div>
+                    </a>
+
+                    <div class="mobile-toggle">
+                        <div class="hamburger-3d">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="product-details-page">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> <span>></span>
+                <a href="products.html">Products</a> <span>></span>
+                <span id="breadcrumbCategory">All Categories</span> <span>></span>
+                <span>Product Details</span>
+            </div>
+            
+            <!-- Product Details Container -->
+            <div class="product-details-container">
+                <!-- Product Gallery -->
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img id="mainProductImage" src="https://via.placeholder.com/500" alt="Product Image">
+                    </div>
+                    <div class="thumbnail-gallery" id="thumbnailGallery">
+                        <!-- Thumbnails will be loaded dynamically -->
+                    </div>
+                </div>
+                
+                <!-- Product Info -->
+                <div class="product-info">
+                    <h1 class="product-title" id="productTitle">Product Name Loading...</h1>
+                    
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <span class="rating-count">(125 reviews)</span>
+                    </div>
+                    
+                    <div class="product-price-section">
+                        <div>
+                            <span class="current-price" id="productPrice">PKR 0.00</span>
+                            <span class="old-price" id="oldPrice">PKR 0.00</span>
+                            <span class="discount-badge" id="discountBadge">0% OFF</span>
+                        </div>
+                        <div class="product-stock" id="stockStatus" style="margin-top: 10px;"></div>
+                    </div>
+                    
+                    <!-- Variants Section -->
+                    <div class="variants-section" id="variantsSection" style="display: none;">
+                        <h4>Available Variants:</h4>
+                        <div class="variant-options" id="variantOptions">
+                            <!-- Variants will be loaded dynamically -->
+                        </div>
+                    </div>
+                    
+                    <div class="delivery-info">
+                        <div class="delivery-option">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span><strong>Standard Delivery</strong>: PKR 150 - Delivery by 2-3 days</span>
+                        </div>
+                        <div class="delivery-option">
+                            <i class="fas fa-bolt"></i>
+                            <span><strong>Express Delivery</strong>: PKR 300 - Delivery by 24 hours</span>
+                        </div>
+                        <div class="delivery-option">
+                            <i class="fas fa-undo"></i>
+                            <span><strong>14 Days Return & Exchange</strong></span>
+                        </div>
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <span><strong>Quantity:</strong></span>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" max="10">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <span id="availableStock">Available: 0</span>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn-buy-now" id="buyNowBtn">
+                            <i class="fas fa-bolt"></i> BUY NOW
+                        </button>
+                        <button class="btn-add-cart" id="addToCartBtn">
+                            <i class="fas fa-shopping-cart"></i> ADD TO CART
+                        </button>
+                    </div>
+                    
+                    <!-- Vendor Information -->
+                    <div class="vendor-info-card">
+                        <div class="vendor-header">
+                            <i class="fas fa-store"></i>
+                            <span class="vendor-name" id="vendorName">Vendor Name</span>
+                            <div class="vendor-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                        <p>98% Positive Seller Ratings</p>
+                        <div class="vendor-actions">
+                            <button class="btn-vendor" id="chatWithVendor">
+                                <i class="fas fa-comment"></i> Chat
+                            </button>
+                            <button class="btn-vendor" id="viewVendorShop">
+                                <i class="fas fa-store"></i> View Shop
+                            </button>
+                            <button class="btn-vendor" id="followVendor">
+                                <i class="fas fa-heart"></i> Follow
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Specifications -->
+                    <div class="product-specs">
+                        <h3>Product Specifications</h3>
+                        <div class="specs-grid" id="specsGrid">
+                            <!-- Specifications will be loaded dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Warranty Section -->
+                    <div class="warranty-section">
+                        <h4>Return & Warranty</h4>
+                        <div class="warranty-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>14 days easy return</span>
+                        </div>
+                        <div class="warranty-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Warranty not available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Description Section -->
+            <div class="product-description-section" style="margin: 40px 0;">
+                <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0;">
+                    <h3>Product Description</h3>
+                    <div id="productDescription" style="line-height: 1.6; color: #555; margin-top: 15px;">
+                        Loading product description...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Customer Reviews Section -->
+            <div class="product-reviews">
+                <h2>Customer Reviews</h2>
+                <div class="reviews-list">
+                    <div class="review">
+                        <div class="review-header">
+                            <div class="review-author">John D.</div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <p>Great product! I've been using it for a month and already see improvements in my energy levels.</p>
+                        </div>
+                    </div>
+                    <div class="review">
+                        <div class="review-header">
+                            <div class="review-author">Sarah M.</div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <p>Good quality, but the taste could be improved. Overall happy with the purchase.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="add-review">
+                    <h3>Add Your Review</h3>
+                    <form class="review-form">
+                        <div class="form-group">
+                            <label for="review-name">Name</label>
+                            <input type="text" id="review-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="review-rating">Rating</label>
+                            <select id="review-rating" required>
+                                <option value="5">5 Stars</option>
+                                <option value="4">4 Stars</option>
+                                <option value="3">3 Stars</option>
+                                <option value="2">2 Stars</option>
+                                <option value="1">1 Star</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="review-text">Review</label>
+                            <textarea id="review-text" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-3d">
+        <div class="footer-wave"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo-3d">
+                        <div class="logo-mini-3d">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <h3>SHOP<span class="text-gradient">EASE</span></h3>
+                        <p>The future of shopping is here. Experience products in stunning 3D.</p>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>NAVIGATE</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>CONTACT</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> +92 320 7454190</li>
+                        <li><i class="fas fa-envelope"></i> info@shopease.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Kohinoor, Faisalabad</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>CONNECT</h4>
+                    <div class="social-3d">
+                        <a href="#" class="social-link-3d"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link-3d"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link-3d"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link-3d"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ShopEase 3D. All rights reserved. | Next Generation Shopping Experience</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="js/jj.js"></script>
+    <script>
+        // Thumbnail gallery functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const mainImage = document.getElementById('mainProductImage');
+            
+            // Quantity controls
+            const minusBtn = document.querySelector('.quantity-btn.minus');
+            const plusBtn = document.querySelector('.quantity-btn.plus');
+            const quantityInput = document.querySelector('.quantity-input');
+            
+            minusBtn.addEventListener('click', function() {
+                let currentValue = parseInt(quantityInput.value);
+                if (currentValue > 1) {
+                    quantityInput.value = currentValue - 1;
+                }
+            });
+            
+            plusBtn.addEventListener('click', function() {
+                let currentValue = parseInt(quantityInput.value);
+                const maxStock = parseInt(document.getElementById('availableStock').textContent.replace('Available: ', ''));
+                if (currentValue < maxStock) {
+                    quantityInput.value = currentValue + 1;
+                }
+            });
+            
+            // Vendor actions
+            document.getElementById('viewVendorShop').addEventListener('click', function() {
+                const vendorId = this.getAttribute('data-vendor-id');
+                if (vendorId) {
+                    window.location.href = `products.html?vendor=${vendorId}`;
+                }
+            });
+            
+            // Initialize product details
+            if (document.querySelector('.product-details-page')) {
+                // This will be handled by the main jj.js file
+            }
+        });
+    </script>
+</body>
+</html>

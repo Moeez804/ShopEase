@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - Customer Dashboard</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --info-color: #17a2b8;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fb;
+        }
+        
+        .dashboard-wrapper {
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            background: linear-gradient(180deg, var(--primary-color) 0%, #3a5bff 100%);
+            color: white;
+            min-height: 100vh;
+            position: fixed;
+            width: 250px;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .sidebar-header {
+            padding: 20px 15px;
+            background: rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255,255,255,0.8);
+            padding: 12px 15px;
+            margin: 2px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sidebar .nav-link:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .sidebar .nav-link.active {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .sidebar .nav-link i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 0;
+            transition: all 0.3s;
+        }
+        
+        .top-navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 15px 25px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        
+        .content-area {
+            padding: 25px;
+        }
+        
+        /* Stats Cards */
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border: none;
+            height: 100%;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-icon.orders { background: rgba(74, 107, 255, 0.1); color: var(--primary-color); }
+        .stat-icon.spent { background: rgba(40, 167, 69, 0.1); color: var(--success-color); }
+        .stat-icon.pending { background: rgba(255, 193, 7, 0.1); color: var(--warning-color); }
+        .stat-icon.processing { background: rgba(23, 162, 184, 0.1); color: var(--info-color); }
+        
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: var(--secondary-color);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Order Status Badges */
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .badge-pending { background: #fff3cd; color: #856404; }
+        .badge-processing { background: #d1ecf1; color: #0c5460; }
+        .badge-shipped { background: #cce5ff; color: #004085; }
+        .badge-delivered { background: #d4edda; color: #155724; }
+        .badge-cancelled { background: #f8d7da; color: #721c24; }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 20px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e9ecef;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+        
+        .timeline-item.completed::before {
+            background: var(--success-color);
+            box-shadow: 0 0 0 2px var(--success-color);
+        }
+        
+        /* Order Card */
+        .order-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            transition: all 0.3s;
+        }
+        
+        .order-card:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .order-header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .order-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f8f9fa;
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .item-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Return specific styles */
+        .return-item-card {
+            transition: all 0.3s ease;
+            border: 1px solid #dee2e6;
+        }
+        
+        .return-item-card.selected {
+            border-color: #0d6efd;
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+        
+        .item-quantity:disabled {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+        
+        /* Return status badges */
+        .badge-return-pending {
+            background-color: #ffc107;
+            color: #000;
+        }
+        
+        .badge-return-approved {
+            background-color: #0dcaf0;
+            color: #fff;
+        }
+        
+        .badge-return-processing {
+            background-color: #0d6efd;
+            color: #fff;
+        }
+        
+        .badge-return-completed {
+            background-color: #198754;
+            color: #fff;
+        }
+        
+        .badge-return-rejected {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        
+        .badge-return-cancelled {
+            background-color: #6c757d;
+            color: #fff;
+        }
+        
+        /* Return card hover effect */
+        .return-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-left: -250px;
+            }
+            
+            .sidebar.active {
+                margin-left: 0;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .top-navbar .btn-toggle {
+                display: block;
+            }
+        }
+        
+        /* Loading Spinner */
+        .spinner-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #6c757d;
+        }
+        
+        .empty-state i {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: #dee2e6;
+        }
+        
+        /* Custom Tab */
+        .nav-tabs-custom {
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .nav-tabs-custom .nav-link {
+            border: none;
+            color: #6c757d;
+            font-weight: 500;
+            padding: 10px 20px;
+            margin-right: 5px;
+        }
+        
+        .nav-tabs-custom .nav-link.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            background: transparent;
+        }
+        
+        /* Pagination */
+        .pagination-custom .page-link {
+            color: var(--primary-color);
+            border: 1px solid #dee2e6;
+            margin: 0 3px;
+            border-radius: 6px;
+        }
+        
+        .pagination-custom .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Quick Stats */
+        .quick-stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        /* Form validation styles */
+        .was-validated .form-control:valid {
+            border-color: #198754;
+        }
+        
+        .was-validated .form-control:invalid {
+            border-color: #dc3545;
+        }
+        
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: #4CAF50;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 9999;
+            max-width: 300px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: #f44336;
+        }
+        
+        .notification.info {
+            background: #2196F3;
+        }
+        
+        .notification.warning {
+            background: #ff9800;
+        }
+        
+        /* Condition Info */
+        .condition-info {
+            font-size: 0.875rem;
+            margin-top: 5px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h4 class="mb-0">ShopEase</h4>
+                <small class="text-white-50">Customer Panel</small>
+            </div>
+            
+            <ul class="nav flex-column pt-3">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#dashboard" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#orders" data-section="orders">
+                        <i class="fas fa-shopping-bag"></i>
+                        My Orders
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#returns" data-section="returns">
+                        <i class="fas fa-undo-alt"></i>
+                        My Returns
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#favorites" data-section="favorites">
+                        <i class="fas fa-heart"></i>
+                        Favorites
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#profile" data-section="profile">
+                        <i class="fas fa-user"></i>
+                        Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#settings" data-section="settings">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+                <li class="nav-item mt-4">
+                    <a class="nav-link text-warning" href="index.html">
+                        <i class="fas fa-store"></i>
+                        Back to Store
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="#" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer p-3 mt-auto">
+                <small class="text-white-50">© 2024 ShopEase</small>
+            </div>
+        </nav>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Navbar -->
+            <nav class="top-navbar d-flex justify-content-between align-items-center">
+                <div>
+                    <button class="btn btn-outline-primary btn-sm d-md-none" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h5 class="d-none d-md-inline mb-0" id="pageTitle">Dashboard</h5>
+                </div>
+                
+                <div class="d-flex align-items-center gap-3">
+                    <div class="dropdown">
+                        <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger">3</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <h6 class="dropdown-header">Notifications</h6>
+                            <a class="dropdown-item" href="#">Order #1234 has been shipped</a>
+                            <a class="dropdown-item" href="#">New offer on your favorite product</a>
+                            <a class="dropdown-item" href="#">Welcome back to ShopEase!</a>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary btn-sm dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown">
+                            <div class="me-2">
+                                <div id="userName">Loading...</div>
+                                <small id="userEmail" class="text-muted"></small>
+                            </div>
+                            <i class="fas fa-user-circle fa-lg"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="#profile"><i class="fas fa-user me-2"></i>Profile</a>
+                            <a class="dropdown-item" href="#settings"><i class="fas fa-cog me-2"></i>Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#" id="logoutBtn2"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Content Area -->
+            <div class="content-area" id="contentArea">
+                <!-- Dashboard Section -->
+                <section id="dashboardSection" class="section-content">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h2 class="mb-0">Welcome back, <span id="welcomeName">Customer</span>!</h2>
+                            <p class="text-muted">Here's what's happening with your orders today.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Stats -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="quick-stats-card">
+                                <div class="row">
+                                    <div class="col-md-3 col-6 mb-3">
+                                        <div class="text-center">
+                                            <h3 id="quickTotalOrders" class="mb-1">0</h3>
+                                            <small>Total Orders</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-6 mb-3">
+                                        <div class="text-center">
+                                            <h3 id="quickTotalSpent" class="mb-1">PKR 0</h3>
+                                            <small>Total Spent</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-6 mb-3">
+                                        <div class="text-center">
+                                            <h3 id="quickActiveOrders" class="mb-1">0</h3>
+                                            <small>Active Orders</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-6 mb-3">
+                                        <div class="text-center">
+                                            <h3 id="quickLastMonthOrders" class="mb-1">0</h3>
+                                            <small>Last Month Orders</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Main Stats -->
+                    <div class="row mb-4">
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-icon orders">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <div class="stat-number" id="totalOrders">0</div>
+                                <div class="stat-label">Total Orders</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-icon spent">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <div class="stat-number" id="totalSpent">PKR 0</div>
+                                <div class="stat-label">Total Spent</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-icon pending">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="stat-number" id="pendingOrders">0</div>
+                                <div class="stat-label">Pending</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-icon processing">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                                <div class="stat-number" id="processingOrders">0</div>
+                                <div class="stat-label">Processing</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Recent Orders -->
+                        <div class="col-lg-8 mb-4">
+                            <div class="stat-card">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0">Recent Orders</h5>
+                                    <a href="#orders" class="btn btn-sm btn-outline-primary">View All</a>
+                                </div>
+                                <div id="recentOrders">
+                                    <div class="spinner-container">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Status Breakdown -->
+                        <div class="col-lg-4 mb-4">
+                            <div class="stat-card">
+                                <h5 class="mb-3">Order Status</h5>
+                                <div id="statusBreakdown">
+                                    <div class="spinner-container">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Frequent Products -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="stat-card">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0">Frequently Ordered Products</h5>
+                                    <a href="products.html" class="btn btn-sm btn-outline-primary">Shop More</a>
+                                </div>
+                                <div id="frequentProducts" class="row">
+                                    <div class="col-12 spinner-container">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Orders Section -->
+                <section id="ordersSection" class="section-content d-none">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h2 class="mb-0">My Orders</h2>
+                            <p class="text-muted">View and manage all your orders</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Filters -->
+                    <div class="row mb-4">
+                        <div class="col-md-9">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-select" id="orderStatusFilter">
+                                        <option value="all">All Status</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="processing">Processing</option>
+                                        <option value="shipped">Shipped</option>
+                                        <option value="delivered">Delivered</option>
+                                        <option value="cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">From Date</label>
+                                    <input type="date" class="form-control" id="orderDateFrom">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">To Date</label>
+                                    <input type="date" class="form-control" id="orderDateTo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button class="btn btn-primary w-100" id="applyFiltersBtn">
+                                <i class="fas fa-filter me-2"></i>Apply Filters
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Orders List -->
+                    <div id="ordersList">
+                        <div class="spinner-container">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav id="ordersPagination" class="d-none">
+                        <ul class="pagination pagination-custom justify-content-center">
+                            <li class="page-item disabled" id="prevPage">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><span class="page-link" id="pageInfo">Page 1 of 1</span></li>
+                            <li class="page-item" id="nextPage">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </section>
+                
+                <!-- Returns Section -->
+                <section id="returnsSection" class="section-content d-none">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h2 class="mb-0">My Returns</h2>
+                                    <p class="text-muted">Manage your return requests and track refunds</p>
+                                </div>
+                                <button class="btn btn-primary" onclick="showNewReturnModal()">
+                                    <i class="fas fa-plus me-1"></i> Request Return
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Filters -->
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <label class="form-label">Status</label>
+                                            <select id="returnStatusFilter" class="form-select">
+                                                <option value="all">All Status</option>
+                                                <option value="pending">Pending</option>
+                                                <option value="approved">Approved</option>
+                                                <option value="processing">Processing</option>
+                                                <option value="completed">Completed</option>
+                                                <option value="rejected">Rejected</option>
+                                                <option value="cancelled">Cancelled</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">From Date</label>
+                                            <input type="date" id="returnDateFrom" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">To Date</label>
+                                            <input type="date" id="returnDateTo" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">&nbsp;</label>
+                                            <button class="btn btn-primary w-100" id="applyReturnFiltersBtn" onclick="applyReturnFilters()">
+                                                <i class="fas fa-filter me-1"></i> Apply Filters
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Returns List -->
+                    <div id="returnsList" class="row">
+                        <div class="col-12">
+                            <div class="spinner-container">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div id="returnsPagination" class="row mt-4 d-none">
+                        <div class="col-12">
+                            <nav aria-label="Returns pagination">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item">
+                                        <button id="prevReturnPage" class="page-link">
+                                            <i class="fas fa-chevron-left"></i> Previous
+                                        </button>
+                                    </li>
+                                    <li class="page-item">
+                                        <span id="returnPageInfo" class="page-link">Page 1 of 1</span>
+                                    </li>
+                                    <li class="page-item">
+                                        <button id="nextReturnPage" class="page-link">
+                                            Next <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Favorites Section -->
+                <section id="favoritesSection" class="section-content d-none">
+                    <div class="empty-state">
+                        <i class="fas fa-heart"></i>
+                        <h5>Coming Soon</h5>
+                        <p>Favorites feature is under development</p>
+                    </div>
+                </section>
+                
+                <!-- Profile Section -->
+                <section id="profileSection" class="section-content d-none">
+                    <div class="empty-state">
+                        <i class="fas fa-user"></i>
+                        <h5>Coming Soon</h5>
+                        <p>Profile management is under development</p>
+                    </div>
+                </section>
+                
+                <!-- Settings Section -->
+                <section id="settingsSection" class="section-content d-none">
+                    <div class="empty-state">
+                        <i class="fas fa-cog"></i>
+                        <h5>Coming Soon</h5>
+                        <p>Settings feature is under development</p>
+                    </div>
+                </section>
+                
+                <!-- Order Detail Modal -->
+                <div class="modal fade" id="orderDetailModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Order Details - <span id="modalOrderId"></span></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="spinner-container">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cancel Order Modal -->
+                <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="cancelModalLabel">Cancel Order #<span id="cancelOrderNumber"></span></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Hidden input for order ID -->
+                                <input type="hidden" id="cancelOrderId">
+                                
+                                <!-- Reason Selection -->
+                                <div class="mb-3">
+                                    <label for="cancelReason" class="form-label">Why are you cancelling this order?</label>
+                                    <select class="form-select" id="cancelReason" required>
+                                        <option value="">Please select a reason</option>
+                                        <option value="changedmind">Changed my mind</option>
+                                        <option value="foundbetterprice">Found better price elsewhere</option>
+                                        <option value="shippingtooslow">Shipping is too slow</option>
+                                        <option value="orderedbymistake">Ordered by mistake</option>
+                                        <option value="financialissues">Financial issues</option>
+                                        <option value="other">Other reason</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Additional Notes (only for "other" reason) -->
+                                <div class="mb-3" id="otherReasonContainer" style="display: none;">
+                                    <label for="otherReason" class="form-label">Please specify your reason</label>
+                                    <textarea class="form-control" id="otherReason" rows="2" placeholder="Please explain..."></textarea>
+                                </div>
+                                
+                                <!-- Additional Notes -->
+                                <div class="mb-3">
+                                    <label for="cancelNotes" class="form-label">Additional Notes (Optional)</label>
+                                    <textarea class="form-control" id="cancelNotes" rows="3" placeholder="Any additional information..."></textarea>
+                                </div>
+                                
+                                <!-- Warning Message -->
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <strong>Important:</strong> 
+                                    <ul class="mb-0 mt-2">
+                                        <li>This action cannot be undone</li>
+                                        <li>Refund will be processed if order was paid</li>
+                                        <li>You can only cancel pending or processing orders</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-danger" id="confirmCancelBtn">
+                                    <i class="fas fa-times me-1"></i> Cancel Order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- New Return Modal -->
+                <div class="modal fade" id="newReturnModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Request New Return</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="returnRequestForm">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Select Order *</label>
+                                            <select id="returnOrderId" class="form-select" required onchange="loadReturnEligibility(this.value)">
+                                                <option value="">Select an order</option>
+                                                <!-- Orders will be populated here -->
+                                            </select>
+                                            <div class="form-text">Only delivered orders within 30 days are eligible</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div id="eligibilityInfo" class="alert alert-info d-none">
+                                                <!-- Eligibility info will be shown here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Return Reason *</label>
+                                        <select id="returnReason" class="form-select" required>
+                                            <option value="">Select reason</option>
+                                            <option value="wrong_item">Wrong item received</option>
+                                            <option value="defective">Product is defective</option>
+                                            <option value="not_as_described">Not as described</option>
+                                            <option value="changed_mind">Changed my mind</option>
+                                            <option value="too_big">Too big/Doesn't fit</option>
+                                            <option value="too_small">Too small</option>
+                                            <option value="damaged">Damaged on arrival</option>
+                                            <option value="other">Other reason</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-3" id="otherReasonContainer" style="display: none;">
+                                        <label class="form-label">Please specify *</label>
+                                        <input type="text" id="otherReason" class="form-control" placeholder="Enter your reason">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Item Condition *</label>
+                                        <select id="itemCondition" class="form-select" required onchange="updateRefundEstimate()">
+                                            <option value="like_new">Like New - Unused with original packaging</option>
+                                            <option value="good">Good - Lightly used, minor signs of wear</option>
+                                            <option value="fair">Fair - Used, shows signs of wear</option>
+                                            <option value="damaged">Damaged - Broken or heavily damaged</option>
+                                        </select>
+                                        <div class="condition-info" id="conditionInfo">
+                                            Like New: 100% refund | Good: 80% refund | Fair: 50% refund | Damaged: No refund
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Return Items Section -->
+                                    <div class="mb-4">
+                                        <h6>Select Items to Return</h6>
+                                        <div id="returnItemsContainer">
+                                            <!-- Items will be loaded here -->
+                                            <div class="text-center p-3 border rounded">
+                                                <p class="mb-0 text-muted">Select an order first to see items</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Additional Notes</label>
+                                        <textarea id="returnNotes" class="form-control" rows="3" 
+                                                  placeholder="Any additional information about your return..."></textarea>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="requestRefund" checked onchange="updateRefundEstimate()">
+                                            <label class="form-check-label">
+                                                Request refund
+                                            </label>
+                                        </div>
+                                        <div class="form-text">Uncheck if you only want to exchange or repair</div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Estimated Refund</label>
+                                        <div class="alert alert-warning" id="estimatedRefund">
+                                            PKR 0.00
+                                        </div>
+                                        <div class="form-text" id="refundDetails"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" onclick="submitReturnRequest()">
+                                    <i class="fas fa-paper-plane me-1"></i> Submit Return Request
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Return Details Modal -->
+                <div class="modal fade" id="returnDetailModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Return Details <span id="modalReturnId"></span></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="spinner-container">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Customer Dashboard JS -->
+    <script src="js/customer-panel.js"></script>
+    <script>
+        // Handle Back to Store link
+document.querySelector('a[href="index.html"]').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'index.html';
+});
+    </script>
+</body>
+</html>
